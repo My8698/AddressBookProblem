@@ -1,5 +1,4 @@
 package com.bridgelabz;
-
 public class Contact {
     private String firstName;
     private String state;
