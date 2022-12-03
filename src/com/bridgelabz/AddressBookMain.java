@@ -10,6 +10,7 @@ public class AddressBookMain {
             System.out.println("1.Add new Contact");
             System.out.println("2.Display");
             System.out.println("3.Edit Contact");
+            System.out.println("4.Delete Contact");
             System.out.println("Enter Your Choice:");
             Scanner scanner = new Scanner(System.in);
             choice = scanner.nextInt();
@@ -23,11 +24,14 @@ public class AddressBookMain {
                 case 3:
                     addressBook.editContactDetails();
                     break;
-
-                default:
+                case 4:
+                    addressBook.deleteContact();
+                    break;
+                case 5:
+                    default:
                     System.out.println("Wrong choice");
                     break;
             }
-        } while (choice != 4);
+        } while (choice != 5);
     }
 }
