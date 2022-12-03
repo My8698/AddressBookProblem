@@ -1,31 +1,29 @@
 package com.bridgelabz;
-
 import java.util.Scanner;
-
 public class AddressBook {
     Contact contact;
     public void addContact() {
         System.out.println("Enter following details.....");
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("First Name : ");
-        String firstName = sc.nextLine();
+        String firstName = scanner.nextLine();
         System.out.println("Last Name : ");
-        String lastName = sc.nextLine();
+        String lastName = scanner.nextLine();
         System.out.println("Address : ");
-        String address = sc.nextLine();
+        String address = scanner.nextLine();
         System.out.println("City : ");
-        String city = sc.nextLine();
+        String city = scanner.nextLine();
         System.out.println("State : ");
-        String state = sc.nextLine();
+        String state = scanner.nextLine();
         System.out.println("Zip Code : ");
-        int zip = sc.nextInt();
+        int zip = scanner.nextInt();
         System.out.println("Phone Number : ");
-        int phoneNumber = sc.nextInt();
+        int phoneNumber = scanner.nextInt();
         System.out.println("Email Id: ");
-        String email = sc.next();
+        String email = scanner.next();
         contact = new Contact(firstName, lastName, address, state, city,email, zip, phoneNumber);
         System.out.println("You have added a contact :) ");
-        sc.close();
+        scanner.close();
     }
     @Override
     public String toString() {
