@@ -3,6 +3,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 public class AddressBook {
     Scanner scanner = new Scanner(System.in);
+    /**
+     * through array list we can add multiple contacts
+     */
     ArrayList<Contact> contacts = new ArrayList<Contact>();
 
     /**
