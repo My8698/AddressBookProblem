@@ -152,6 +152,10 @@ public class AddressBookMain {
                             break;
                     }
                     break;
+                case 12:
+                    System.out.println("Enter city name");
+                    AddressBook.getCountByCity(addressBookHashMap,scanner.next());
+                    break;
                 default:
                     System.out.println("Invalid Input");
             }
