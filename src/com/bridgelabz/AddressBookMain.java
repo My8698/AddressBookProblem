@@ -13,7 +13,7 @@ public class AddressBookMain {
         String filePath="C:\\Users\\Hemant\\IdeaProjects\\NewAddBoo\\src";
         while (true) {
             System.out.println("0.Exit \n1.Add Contact \n2.Display Contact \n3.Edit Contact \n4.Delete Contact \n5.Add new Address Book" +
-                    "\n6.Display available address books \n7.Display all address books \n8.Write address book to file \n9.Read address book from file");
+                    "\n6.Display available address books \n7.Display all address books \n8.Write address book to file \n9.Read address book from file \n10.Search by city or state");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 0:
@@ -122,7 +122,19 @@ public class AddressBookMain {
                     }catch (Exception exception){
                         System.out.println(exception);
                     }
-
+                    break;
+                case 10:
+                    Set<Map.Entry<String, AddressBook>> addressBook2 = addressBookHashMap.entrySet();
+                    System.out.println("Enter city or state : ");
+                    String location = scanner.next();
+                    if (addressBook2.isEmpty()){
+                        System.out.println("No address books available!");
+                    }
+                    for (Map.Entry entry :  addressBook2){
+                        System.out.println(entry.getKey());
+                        AddressBook addBook = (AddressBook) entry.getValue();
+                        addBook.searchByCityOrState(location);
+                    }
                     break;
                 default:
                     System.out.println("Invalid Input");
