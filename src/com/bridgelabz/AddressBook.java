@@ -1,7 +1,6 @@
 package com.bridgelabz;
-import java.util.List;
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
+
 public class AddressBook {
     Scanner scanner = new Scanner(System.in);
     /**
@@ -191,6 +190,21 @@ public class AddressBook {
                 System.out.println(contact);
             }
         });
+    }
+
+    /**
+     * method to view person by city
+     * */
+    public static void viewContactByCity(HashMap<String, AddressBook> addressBookHashMap, String city) {
+        for(Map.Entry < String, AddressBook> entries : addressBookHashMap.entrySet()) {
+            entries.getValue().getContactList().stream().filter(p -> p.getCity().equalsIgnoreCase(city)).forEach(p -> System.out.println(p));
+        }
+
+    }
+    public static void viewContactByState(HashMap<String, AddressBook> addressBookHashMap,String state) {
+        for(Map.Entry < String, AddressBook> entries : addressBookHashMap.entrySet()) {
+            entries.getValue().getContactList().stream().filter(p -> p.getState().equalsIgnoreCase(state)).forEach(p -> System.out.println(p));
+        }
     }
 
 }

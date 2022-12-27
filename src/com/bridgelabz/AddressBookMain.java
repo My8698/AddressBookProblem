@@ -13,7 +13,7 @@ public class AddressBookMain {
         String filePath="C:\\Users\\Hemant\\IdeaProjects\\NewAddBoo\\src";
         while (true) {
             System.out.println("0.Exit \n1.Add Contact \n2.Display Contact \n3.Edit Contact \n4.Delete Contact \n5.Add new Address Book" +
-                    "\n6.Display available address books \n7.Display all address books \n8.Write address book to file \n9.Read address book from file \n10.Search by city or state");
+                    "\n6.Display available address books \n7.Display all address books \n8.Write address book to file \n9.Read address book from file \n10.Search by city or state \n11.View Person by city or state");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 0:
@@ -134,6 +134,22 @@ public class AddressBookMain {
                         System.out.println(entry.getKey());
                         AddressBook addBook = (AddressBook) entry.getValue();
                         addBook.searchByCityOrState(location);
+                    }
+                    break;
+                case 11:
+                    System.out.println("1. View by city 2.View by state");
+                    int input = scanner.nextInt();
+                    switch (input){
+                        case 1:
+                            System.out.println("Enter city :");
+                            String city = scanner.next();
+                            AddressBook.viewContactByCity(addressBookHashMap,city);
+                            break;
+                        case 2:
+                            System.out.println("Enter state :");
+                            String state = scanner.next();
+                            AddressBook.viewContactByState(addressBookHashMap, state);
+                            break;
                     }
                     break;
                 default:
