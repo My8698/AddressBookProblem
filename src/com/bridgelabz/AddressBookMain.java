@@ -157,9 +157,21 @@ public class AddressBookMain {
                     AddressBook.getCountByCity(addressBookHashMap,scanner.next());
                     break;
                 case 13:
-                    AddressBook.sortByName(addressBookHashMap);
+                    System.out.println("1.sort by name \t2.sort by City \t3.sort by State");
+                    int sort = scanner.nextInt();
+                    switch (sort){
+                        case 1:
+                            AddressBook.sortByName(addressBookHashMap);
+                            break;
+                        case 2:
+                            AddressBook.sortByCity(addressBookHashMap);
+                            break;
+                        case 3:
+                            AddressBook.sortByState(addressBookHashMap);
+                            break;
+                    }
                     break;
-                default:
+                    default:
                     System.out.println("Invalid Input");
             }
         }
