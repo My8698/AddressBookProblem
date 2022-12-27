@@ -1,4 +1,5 @@
 package com.bridgelabz;
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class AddressBook {
@@ -7,6 +8,7 @@ public class AddressBook {
      * through array list we can add multiple contacts
      */
     ArrayList<Contact> contacts = new ArrayList<Contact>();
+    RegixPattern regixPattern=new RegixPattern();
 
     /**
      * method to add contacts in addressbook
@@ -15,20 +17,60 @@ public class AddressBook {
         Contact contact1 = new Contact();
         System.out.println("Enter First name-> ");
         contact1.setFirstName(scanner.next());
+        if (regixPattern.isFirstNameValid(contact1.getFirstName()))
+            System.out.println("Valid first name");
+        else
+            System.out.println("Invalid first name");
+
         System.out.println("Enter Last name-> ");
         contact1.setLastName(scanner.next());
+        if (regixPattern.isLastNameValid(contact1.getLastName()))
+            System.out.println("Valid last name");
+        else
+            System.out.println("Invalid last name");
+
         System.out.println("Enter name of State-> ");
         contact1.setState(scanner.next());
-        System.out.println("Enter City-> ");
+        if (regixPattern.isStateValid(contact1.getState()))
+            System.out.println("Valid state name");
+        else
+            System.out.println("Invalid state name");
+
+        System.out.println("Enter name of City-> ");
         contact1.setCity(scanner.next());
+        if (regixPattern.isCityValid(contact1.getCity()))
+            System.out.println("Valid city name");
+        else
+            System.out.println("Invalid city name");
+
         System.out.println("Enter Address-> ");
         contact1.setAddress(scanner.next());
+        if (regixPattern.isAddressValid(contact1.getAddress()))
+            System.out.println("Valid Address");
+        else
+            System.out.println("Invalid Address");
+
         System.out.println("Enter E-Mail-> ");
         contact1.setEmail(scanner.next());
+//        if (regixPattern.isEmailValid(contact1.getEmail()))
+//            System.out.println("Valid E-Mail");
+//        else
+//            System.out.println("Invalid E-Mail");
+
         System.out.println("Enter Zip-> ");
-        contact1.setZip(scanner.nextInt());
+        contact1.setZip(scanner.next());
+        if (regixPattern.isZipValid(contact1.getZip()))
+            System.out.println("Valid Zip");
+        else
+            System.out.println("Invalid Zip");
+
         System.out.println("Enter Phone Number-> ");
-        contact1.setPhoneNumber(scanner.nextInt());
+        contact1.setPhoneNumber(scanner.next());
+        if (regixPattern.isPhoneNumberValid(contact1.getPhoneNumber()))
+            System.out.println("Valid PhoneNumber");
+        else
+            System.out.println("Invalid PhoneNumber");
+
         contacts.add(contact1);
     }
 
@@ -93,12 +135,12 @@ public class AddressBook {
                         break;
                     case 7:
                         System.out.println("Enter zip code :");
-                        contact.setZip(scanner.nextInt());
+                        contact.setZip(scanner.next());
                         System.out.println("Contact updated...!");
                         break;
                     case 8:
                         System.out.println("Enter Phone number :");
-                        contact.setPhoneNumber(scanner.nextInt());
+                        contact.setPhoneNumber(scanner.next());
                         System.out.println("Contact updated...!");
                         break;
                     default:
@@ -127,6 +169,18 @@ public class AddressBook {
         }
         System.out.println(name + "not found!");
 
+    }
+    public List<Contact> getContactList(){
+        return contacts;
+    }
+    /**
+     * This method is used to check the duplicate entry
+     * if first and last name already exists in addressbook then it will not return true i.e. duplicate entry
+     * if duplicate return true else return false
+     * */
+    public boolean isDuplicate(String firstName, String lastName){
+        boolean result = contacts.stream().filter(contact -> contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName)).count() > 0;
+        return result;
     }
 
 }

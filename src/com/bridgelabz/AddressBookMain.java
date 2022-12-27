@@ -1,17 +1,19 @@
 package com.bridgelabz;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.*;
+
 public class AddressBookMain {
     public static void main(String[] args) {
         System.out.println("****Welcome To Address Book Program****");
         Scanner scanner = new Scanner(System.in);
         HashMap<String, AddressBook> addressBookHashMap = new HashMap<>();
-
+        String filePath="C:\\Users\\Hemant\\IdeaProjects\\NewAddBoo\\src";
         while (true) {
             System.out.println("0.Exit \n1.Add Contact \n2.Display Contact \n3.Edit Contact \n4.Delete Contact \n5.Add new Address Book" +
-                    "\n6.Display available address books \n7.Display all address books");
+                    "\n6.Display available address books \n7.Display all address books \n8.Write address book to file \n9.Read address book from file");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 0:
@@ -20,6 +22,10 @@ public class AddressBookMain {
                 case 1:
                     System.out.println("Enter the address book name to add contact in that address book : ");
                     String addressBookName = scanner.next();
+                    /**
+                     * containsKey is method of HashMap class is used to check weather the calling Hashmap
+                     * contains specified key
+                     */
                     if (!addressBookHashMap.containsKey(addressBookName)) {
                         System.out.println("Address book not exists!");
                     } else {
@@ -87,6 +93,36 @@ public class AddressBookMain {
                         AddressBook addBook = (AddressBook) entry.getValue();
                         addBook.displayContact();
                     }
+                case 8:
+                    Set<Map.Entry<String, AddressBook>> addressBook1 = addressBookHashMap.entrySet();
+                    for (Map.Entry entry :  addressBook1) {
+                        try {
+                            FileOutputStream fileOutputStream = new FileOutputStream(filePath + entry.getKey() + ".txt");
+                            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+                            AddressBook adBook = (AddressBook) entry.getValue();
+                            List<Contact> contacts = adBook.getContactList();
+                            objectOutputStream.writeObject(contacts);
+                            objectOutputStream.close();
+                        } catch (Exception exception) {
+                            System.out.println(exception);
+                        }
+                    }
+                    break;
+                case 9:
+                    System.out.println("Enter address book name :");
+                    String file = scanner.next();
+                    try{
+                        FileInputStream fileInputStream = new FileInputStream(filePath+file+".txt");
+                        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+                        List<Contact> contacts = (List<Contact>) objectInputStream.readObject();
+                        objectInputStream.close();
+                        for (Contact contact : contacts){
+                            System.out.println(contact);
+                        }
+                    }catch (Exception exception){
+                        System.out.println(exception);
+                    }
+
                     break;
                 default:
                     System.out.println("Invalid Input");
