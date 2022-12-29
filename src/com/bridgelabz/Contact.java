@@ -61,13 +61,18 @@ public class Contact {
         return zip;
     }
     public void setZip(String zip) {
-        this.zip = zip;
+        if (zip.length() == 6) {
+            this.zip = zip;
+        }
     }
     public String getPhoneNumber() {
         return phoneNumber;
     }
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        if (phoneNumber.length() == 10) {
+            this.phoneNumber = phoneNumber;
+        }
+    
     }
     @Override
     public String toString() {
