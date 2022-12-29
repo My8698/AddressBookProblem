@@ -1,96 +1,129 @@
 package com.bridgelabz;
-
-import java.util.regex.Matcher;
+import java.util.Scanner;
 import java.util.regex.Pattern;
-
 public class RegixPattern {
-    private Pattern pattern;
+    Scanner input = new Scanner(System.in);
+    public String validFirstName() {
+        /**
+         * create a regular expression for user first name
+         */
+        System.out.print("Enter first name :-> ");
+        String firstName = input.next();
+        boolean status = Pattern.compile("[A-Z]{1}[a-z]{2,15}").matcher(firstName).matches();
+        if (status == true) {
+            System.out.println(firstName + " is valid first name");
+        } else {
+            System.out.println(firstName + " is not valid first name");
+            validFirstName();
+        }
+        return firstName;
+    }
+    public String validLastName() {
+        /**
+         * create a regular expression for user last name
+         */
+        System.out.print("Enter last name :-> ");
+        String lastName = input.next();
+        boolean status = Pattern.compile("[A-Z]{1}[a-z]{2,15}").matcher(lastName).matches();
+        if (status == true) {
+            System.out.println(lastName + " is valid last name");
+        } else {
+            System.out.println(lastName + " is not valid last name");
+            validFirstName();
+        }
+        return lastName;
+    }
+    public String validAddress() {
+        /**
+         * create a regular expression for user address
+         * This method return address
+         */
+        System.out.print("Enter Address:-> ");
+        String address = input.next();
+        boolean status = Pattern.compile("[A-Z]{1}[a-z]{2,15}").matcher(address).matches();
+        if (status == true) {
+            System.out.println(address + " is valid address");
+        } else {
+            System.out.println(address + " is not valid address");
+            validFirstName();
+        }
+        return address;
+    }
+    public String validCity() {
+        /**
+         * create a regular expression for user city
+         */
+        System.out.print("Enter city:-> ");
+        String city = input.next();
+        boolean status = Pattern.compile("[A-Z]{1}[a-z]{2,15}").matcher(city).matches();
+        if (status == true) {
+            System.out.println(city + " is valid city");
+        } else {
+            System.out.println(city + " is not valid city");
+            validFirstName();
+        }
+        return city;
+    }
+    public String validState() {
+        /**
+         * create a regular expression for user state
+         */
+        System.out.print("Enter state:-> ");
+        String state = input.next();
+        boolean status = Pattern.compile("[A-Z]{1}[a-z]{2,15}").matcher(state).matches();
+        if (status == true) {
+            System.out.println(state + " is valid state");
+        } else {
+            System.out.println(state + " is not valid state");
+            validFirstName();
+        }
+        return state;
+    }
+    public String validZip() {
+        /**
+         * create a regular expression for user zip code
+         * This method return zip code
+         */
+        System.out.print("Enter ZIP code:-> ");
+        String zip = input.next();
+        boolean status = Pattern.compile("[1-9]{1}[0-9]{5}").matcher(zip).matches();
+        if (status == true) {
+            System.out.println(zip + " is valid zip");
+        } else {
+            System.out.println(zip + " is not valid zip");
+            validFirstName();
+        }
+        return zip;
+    }
+    public String validPhoneNumber() {
+        /**
+         * create a regular expression for user mobile number
+         */
+        System.out.print("Enter mobile number:-> ");
+        String phoneNumber = input.next();
+        boolean status = Pattern.compile("[7-9]{1}[0-9]{9}").matcher(phoneNumber).matches();
+        if (status == true) {
+            System.out.println(phoneNumber + " is valid mobile number");
+        } else {
+            System.out.println(phoneNumber + " is not valid mobile number");
+     validFirstName();
+        }
+        return phoneNumber;
+    }
 
-    private Matcher matcher;
-
-    public boolean isFirstNameValid(String firstName) {
-        String regex = "[A-Z][a-z]{2,15}";
-        pattern = Pattern.compile(regex);
-         matcher = pattern.matcher(firstName);
-        return matcher.matches();
-    }
-    public boolean isLastNameValid(String lastName) {
-        String regex = "[A-Z][a-z]{2,15}";
-        pattern = Pattern.compile(regex);
-        matcher = pattern.matcher(lastName);
-        return matcher.matches();
-    }
-    public boolean isStateValid(String State) {
-        String regex = "[A-Z][a-z]{2,15}";
-        pattern = Pattern.compile(regex);
-        matcher = pattern.matcher(State);
-        return matcher.matches();
-    }
-    public boolean isCityValid(String City) {
-        String regex = "[A-Z][a-z]{2,15}";
-        pattern = Pattern.compile(regex);
-        matcher = pattern.matcher(City);
-        return matcher.matches();
-    }
-    public boolean isAddressValid(String Address) {
-        String regex = "[A-Z][a-z]{2,15}";
-        pattern = Pattern.compile(regex);
-        matcher = pattern.matcher(Address);
-        return matcher.matches();
-    }
-//    public boolean isEmailValid(String Email) {
-//        String regex = "^[a-zA-Z0-9]+([._+-]*[0-9A-Za-z]+)*@[a-zA-Z0-9]+.[a-zA-Z]{2,4}([.][a-z]{2,4})?$";
-//        pattern = Pattern.compile(regex);
-//        matcher = pattern.matcher(Email);
-//        return matcher.matches();
-//    }
-//    /**
-//     * list of valid mail Id's
-//     */
-//        emails.add("abc@yahoo.com");
-//        emails.add("abc-100@yahoo.com");
-//        emails.add("abc.100@yahoo.com");
-//        emails.add("abc111@abc.com");
-//        emails.add("abc-100@abc.net");
-//        emails.add("abc.100@abc.com.au");
-//        emails.add("abc@1.com");
-//        emails.add("abc@gmail.com.com");
-//        emails.add("abc+100@gmail.com");
-//
-//    /**
-//     * list of Invalid mail Id's
-//     */
-//        emails.add("abc");
-//        emails.add("abc@.com.my");
-//        emails.add("abc123@gmail.a");
-//        emails.add("abc123@.com");
-//        emails.add("abc123@.com.com");
-//        emails.add(".abc@abc.com");
-//        emails.add("abc()*@gmail.com");
-//        emails.add("abc@%*.com");
-//        emails.add("abc..2002@gmail.com");
-//        emails.add("abc.@gmail.com");
-//        emails.add("abc@abc@gmail.com");
-//        emails.add("abc@gmail.com.1a");
-//        emails.add("abc@gmail.com.aa.au");
-//
-//        for (String Email:emails){
-//        if (contact1.isEmailValid(Email))
-//            System.out.println(Email + " Valid Email");
-//        else
-//            System.out.println(Email + " Invalid Email");
-//
-//    }
-    public boolean isZipValid(String Zip) {
-        String regex = "[0-9]{6,}";
-        pattern = Pattern.compile(regex);
-        matcher = pattern.matcher(Zip);
-        return matcher.matches();
-    }
-    public boolean isPhoneNumberValid(String PhoneNumber) {
-        String regex = "^([0-9]{2}\\s)?[6789]{1}[0-9]{9}";
-        pattern = Pattern.compile(regex);
-        matcher = pattern.matcher(PhoneNumber);
-        return matcher.matches();
+    public String valid_email() {
+        /**
+         * create a regular expression for user email address
+        */
+        System.out.print("Enter email:-> ");
+        String email = input.next();
+        boolean status = Pattern.compile("[a-z]{2,20}[0-9]{0,5}[@]{1}[gmail]{5}[.]{1}[com]{3}").matcher(email).matches();
+        if (status == true) {
+            System.out.println(email + " is valid email");
+        } else {
+            System.out.println(email + " is not valid email");
+     validFirstName();
+        }
+        return email;
     }
 }
