@@ -1,8 +1,4 @@
 package com.bridgelabz;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class AddressBookMain {
@@ -13,7 +9,7 @@ public class AddressBookMain {
         String filePath="C:\\Users\\Hemant\\IdeaProjects\\NewAddBoo\\src";
         while (true) {
             System.out.println("0.Exit \n1.Add Contact \n2.Display Contact \n3.Edit Contact \n4.Delete Contact \n5.Add new Address Book" +
-                    "\n6.Display available address books \n7.Display all address books \n8.Write address book to file \n9.Read address book from file \n10.Search by city or state \n11.View Person by city or state \n12.Get person count by city\n13.sort contacts by name");
+                    "\n6.Display available address books \n7.Display all address books \n8.Search by city or state \n9.View Person by city or state \n10.Get person count by city \n11.Sort contact");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 0:
@@ -94,36 +90,6 @@ public class AddressBookMain {
                         addBook.displayContact();
                     }
                 case 8:
-                    Set<Map.Entry<String, AddressBook>> addressBook1 = addressBookHashMap.entrySet();
-                    for (Map.Entry entry :  addressBook1) {
-                        try {
-                            FileOutputStream fileOutputStream = new FileOutputStream(filePath + entry.getKey() + ".txt");
-                            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-                            AddressBook adBook = (AddressBook) entry.getValue();
-                            List<Contact> contacts = adBook.getContactList();
-                            objectOutputStream.writeObject(contacts);
-                            objectOutputStream.close();
-                        } catch (Exception exception) {
-                            System.out.println(exception);
-                        }
-                    }
-                    break;
-                case 9:
-                    System.out.println("Enter address book name :");
-                    String file = scanner.next();
-                    try{
-                        FileInputStream fileInputStream = new FileInputStream(filePath+file+".txt");
-                        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                        List<Contact> contacts = (List<Contact>) objectInputStream.readObject();
-                        objectInputStream.close();
-                        for (Contact contact : contacts){
-                            System.out.println(contact);
-                        }
-                    }catch (Exception exception){
-                        System.out.println(exception);
-                    }
-                    break;
-                case 10:
                     Set<Map.Entry<String, AddressBook>> addressBook2 = addressBookHashMap.entrySet();
                     System.out.println("Enter city or state : ");
                     String location = scanner.next();
@@ -136,7 +102,7 @@ public class AddressBookMain {
                         addBook.searchByCityOrState(location);
                     }
                     break;
-                case 11:
+                case 9:
                     System.out.println("1. View by city 2.View by state");
                     int input = scanner.nextInt();
                     switch (input){
@@ -152,11 +118,11 @@ public class AddressBookMain {
                             break;
                     }
                     break;
-                case 12:
+                case 10:
                     System.out.println("Enter city name");
                     AddressBook.getCountByCity(addressBookHashMap,scanner.next());
                     break;
-                case 13:
+                case 11:
                     System.out.println("1.sort by name \t2.sort by City \t3.sort by State");
                     int sort = scanner.nextInt();
                     switch (sort){
