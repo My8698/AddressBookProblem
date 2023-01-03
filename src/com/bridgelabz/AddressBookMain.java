@@ -1,19 +1,15 @@
 package com.bridgelabz;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.*;
 
 public class AddressBookMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("****Welcome To Address Book Program****");
         Scanner scanner = new Scanner(System.in);
         HashMap<String, AddressBook> addressBookHashMap = new HashMap<>();
-        String filePath="C:\\Users\\Hemant\\IdeaProjects\\NewAddBoo\\src";
+        String filePath="C:\\Users\\Hemant\\IdeaProjects\\NewAddBoo\\src\\AdressBook.txt";
         while (true) {
-            System.out.println("0.Exit \n1.Add Contact \n2.Display Contact \n3.Edit Contact \n4.Delete Contact \n5.Add new Address Book" +
-                    "\n6.Display available address books \n7.Display all address books \n8.Write address book to file \n9.Read address book from file \n10.Search by city or state \n11.View Person by city or state \n12.Get person count by city\n13.sort contacts by name");
+            System.out.println("0.Exit \n1.Add Contact \n2.Display Contact \n3.Edit Contact \n4.Delete Contact \n5.Add new Address Book \n6.Display available address books \n7.Display all address books \n8.Write address book to file \n9.Read address book from file \n10.Search by city or state \n11.View Person by city or state \n12.Get person count by city\n13.sort contacts by name");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 0:
@@ -94,33 +90,38 @@ public class AddressBookMain {
                         addBook.displayContact();
                     }
                 case 8:
-                    Set<Map.Entry<String, AddressBook>> addressBook1 = addressBookHashMap.entrySet();
-                    for (Map.Entry entry :  addressBook1) {
-                        try {
-                            FileOutputStream fileOutputStream = new FileOutputStream(filePath + entry.getKey() + ".txt");
-                            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-                            AddressBook adBook = (AddressBook) entry.getValue();
-                            List<Contact> contacts = adBook.getContactList();
-                            objectOutputStream.writeObject(contacts);
-                            objectOutputStream.close();
-                        } catch (Exception exception) {
-                            System.out.println(exception);
+                    File fileWrite = new File(filePath);
+                    BufferedWriter write = null;
+                    try {
+                        write = new BufferedWriter(new FileWriter(fileWrite));
+                        /**
+                         * entryset() method is used to create a set of same elements contained in hashmap
+                         */
+                        for (Map.Entry<String, AddressBook> entry : addressBookHashMap.entrySet()) {
+                            write.write(entry.getKey() + " : " + entry.getValue());
+                            write.newLine();
                         }
+                        /**
+                         * a buffer is a portion in memory that is used to store a stream of data
+                         */
+                        write.flush();
+                    } catch (IOException e) {
+                        /**
+                         * printStackTrace is tool use to handle exceptions and errors
+                         */
+                        e.printStackTrace();
                     }
                     break;
                 case 9:
-                    System.out.println("Enter address book name :");
-                    String file = scanner.next();
-                    try{
-                        FileInputStream fileInputStream = new FileInputStream(filePath+file+".txt");
-                        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                        List<Contact> contacts = (List<Contact>) objectInputStream.readObject();
-                        objectInputStream.close();
-                        for (Contact contact : contacts){
-                            System.out.println(contact);
-                        }
-                    }catch (Exception exception){
-                        System.out.println(exception);
+                    File fileRead = new File(filePath);
+                    BufferedReader read = new BufferedReader(new FileReader(fileRead));
+                    String word;
+                    /**
+                     * buffered readre class is used to read text from character-based i/p stream
+                     * It can be used to read data line by line using readLine()
+                     */
+                    while ((word = read.readLine()) != null) {
+                        System.out.println(word);
                     }
                     break;
                 case 10:
